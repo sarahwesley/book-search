@@ -21,9 +21,15 @@ const SignupForm = () => {
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
+
+    const form = event.currentTarget;
+    if (form.checkValidity() === false) {
+      event.preventDefault();
+      event.stopPropagation;
+    }
     // refactored code
     try {
-      const {data } = await addUser({
+      const { data } = await addUser({
         variables: {...userFormData}
       });
       Auth.login(data.addUser.token)

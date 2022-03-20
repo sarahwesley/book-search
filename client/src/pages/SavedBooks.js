@@ -2,8 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { Jumbotron, Container, CardColumns, Card, Button } from 'react-bootstrap';
 // import { getMe, deleteBook } from '../utils/API';
 import Auth from '../utils/auth';
-import { removeBookId } from '../utils/localStorage';
 import {useMutation, useQuery} from '@apollo/react-hooks';
+import { removeBookId, saveBookIds } from '../utils/localStorage';
 import { GET_ME } from '../utils/queries';
 import { REMOVE_BOOK } from '../utils/mutations';
 
@@ -20,8 +20,8 @@ const SavedBooks = () => {
     }
 
     try {
-      const {data} = await removeBook({
-        variables: { bookId }
+      const response = await removeBook({
+        variables: { bookId: bookId },
       });
 
       removeBookId(bookId);
@@ -34,6 +34,9 @@ const SavedBooks = () => {
   if (loading) {
     return <h2>LOADING...</h2>;
   }
+
+  const savedBookIds = userData.savedBooks.map((book) => book.bookId);
+  saveBookIds(savedBookdIds);
 
   return (
     <>

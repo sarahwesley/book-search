@@ -22,7 +22,6 @@ const SearchBooks = () => {
     return () => saveBookIds(savedBookIds);
   });
 
-  // create method to search for books and set state on form submit
   const handleFormSubmit = async (event) => {
     event.preventDefault();
 
@@ -67,7 +66,7 @@ const SearchBooks = () => {
     }
 
     try {
-      const {data} = await saveBook({
+      const response = await saveBook({
         variables: { input: bookToSave }
       });
 
