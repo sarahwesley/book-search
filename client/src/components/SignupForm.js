@@ -21,10 +21,9 @@ const SignupForm = () => {
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
-
     // refactored code
     try {
-      const { data } = await addUser({
+      const {data } = await addUser({
         variables: {...userFormData}
       });
       Auth.login(data.addUser.token)
